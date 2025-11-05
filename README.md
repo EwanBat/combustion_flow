@@ -45,8 +45,8 @@ nm_method/
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/VOTRE_USERNAME/nm_method.git
-cd nm_method
+git clone https://github.com/EwanBat/combustion_flow.git
+cd combustion_flow
 ```
 
 2. Install dependencies:
@@ -84,32 +84,34 @@ Edit `main.py` to adjust:
 ### Governing Equations
 
 **Momentum (Navier-Stokes):**
-```
-∂u/∂t + u·∇u = -∇P/ρ + ν∇²u
-∇·u = 0  (incompressibility)
-```
+$$
+\frac{\partial \vec{u}}{\partial t} + \vec{u} \cdot \nabla \vec{u} = -\frac{\nabla P}{\rho} + \nu \nabla^2 \vec{u}
+$$
+$$
+\nabla \cdot \vec{u} = 0 \quad \text{(incompressibility)}
+$$
 
 **Species transport:**
-```
-∂Yᵢ/∂t + u·∇Yᵢ = D∇²Yᵢ + ωᵢ
-```
+$$
+\frac{\partial Y_i}{\partial t} + \vec{u} \cdot \nabla Y_i = D \nabla^2 Y_i + \frac{\omega_i}{\rho}
+$$
 
 **Energy (temperature):**
-```
-∂T/∂t + u·∇T = α∇²T + Q/(ρcₚ)
-```
+$$
+\frac{\partial T}{\partial t} + \vec{u} \cdot \nabla T = \alpha \nabla^2 T + \frac{Q}{\rho c_p}
+$$
 
 ### Reaction Model
 
 Simple one-step methane combustion:
-```
-CH₄ + 2O₂ → CO₂ + 2H₂O
-```
+$$
+\text{CH}_4 + 2\text{O}_2 \rightarrow \text{CO}_2 + 2\text{H}_2\text{O}
+$$
 
 With Arrhenius rate:
-```
-ω = A·exp(-Ea/RT)·[CH₄]·[O₂]
-```
+$$
+\omega = A \cdot \exp\left(-\frac{E_a}{RT}\right) \cdot [\text{CH}_4] \cdot [\text{O}_2]^2
+$$
 
 ## Visualization
 
@@ -134,7 +136,7 @@ This project is provided for educational purposes.
 
 ## Authors
 
-- Votre nom
+- Ewan Bataille
 
 ## Acknowledgments
 
