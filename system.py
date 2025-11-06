@@ -613,7 +613,7 @@ class System:
         fig, ax = plt.subplots(figsize=(8, 6))
         # Utiliser la colormap spécifique à l'espèce
         im = ax.imshow(data_sequence[0].T, extent=(0, self.Lx*1e3, 0, self.Ly*1e3), 
-                       aspect='auto', cmap=cmap, origin='lower', vmin=0, vmax=1, animated=True)
+                       aspect='auto', cmap=cmap, origin='lower', vmin=np.min(data_sequence[-1]), vmax=np.max(data_sequence[-1]), animated=True)
         title_text = ax.set_title(f'Mass Fraction of {display_name} at t=0s', animated=True)
         plt.colorbar(im, ax=ax, label=f'Y_{display_name}')
         ax.set_xlabel('x (mm)')
