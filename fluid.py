@@ -177,8 +177,8 @@ class Fluid:
         # === Boundary conditions ===
         # Left boundary (inlet) Neumann
         P_new[0, :] = P_new[1, :]
-        # Right boundary (outlet) reference pressure (Dirichlet)
-        P_new[-1, :] = 0.0
+        # Right boundary (outlet) reference pressure
+        P_new[-1, :] = P_new[-2, :]
         # Bottom and top walls Neumann
         P_new[:, 0] = P_new[:, 1]
         P_new[:, -1] = P_new[:, -2]
