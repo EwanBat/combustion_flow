@@ -650,3 +650,44 @@ class System:
 
         print("Animation complete.")
         plt.show()
+    
+    def animation_temperature(self, load_from="simulation_data", interval=200, save=False, filename="temperature_animation.gif"):
+        """
+        Create an animation of temperature field over time.
+        
+        Args:
+            load_from: Path prefix to load data from
+            interval: Delay between frames in milliseconds
+            save: Whether to save the animation to file
+            filename: Output filename if save=True
+        """
+        print("Creating temperature animation...")
+        
+        # Tri naturel des fichiers
+        file_list = sorted([f for f in os.listdir("data//") 
+                       if f.startswith(f"{load_from}_t") and f.endswith('_T.npy')],
+                       key=lambda x: int(''.join(filter(str.isdigit, x.split('_t')[1].split('_')[0]))))
+        
+        data_sequence = [np.load(os.path.join("data//", f)) for f in file_list]
+
+        fig, ax = plt.subplots(figsize=(8, 6))
+        im = ax.imshow(data_sequence[0].T, extent=(0, self.Lx*1e3, 0, self.Ly*1e3), 
+                       aspect='auto', cmap='hot', origin='lower', vmin=np.min(data_sequence[-1]), vmax=np.max(data_sequence[-1]), animated=True)
+        title_text = ax.set_title(f'Temperature at t=0s', animated=True)
+        plt.colorbar(im, ax=ax, label='Temperature (K)')
+        ax.set_xlabel('x (mm)')
+        ax.set_ylabel('y (mm)')
+
+        def update(frame):
+            im.set_array(data_sequence[frame].T)
+            # update animated title text
+            title_text.set_text(f'Temperature at t={frame*self.dt_data:.4f}s')
+            return [im, title_text]
+
+        ani = animation.FuncAnimation(fig, update, frames=len(data_sequence), interval=interval, blit=True)
+
+        if save:
+            ani.save(filename, writer='pillow', fps=30)
+
+        print("Temperature animation complete.")
+        plt.show()
