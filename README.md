@@ -40,6 +40,7 @@ nm_method/
 - NumPy
 - Matplotlib
 - SciPy (optional, for advanced features)
+- Numba (for performance optimization)
 
 ## Installation
 
